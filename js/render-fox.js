@@ -1,7 +1,7 @@
-var renderFox = function (canvas, opts) {
-    var width = opts.canvas.width;
-    var height = opts.canvas.height;
-    var ctx = canvas.getContext('2d');
+const renderFox = function (canvas, opts) {
+    const width = opts.canvas.width;
+    const height = opts.canvas.height;
+    const ctx = canvas.getContext('2d');
 
     ctx.fillStyle = opts.canvas.color;
     ctx.fillRect(0, 0, width, height);
@@ -15,8 +15,8 @@ var renderFox = function (canvas, opts) {
 };
 
 function shift_canvas(ctx, w, h, dx, dy) {
-  var topImage = ctx.getImageData(0, 0, w, h);
-  var bottomImage = ctx.getImageData(0, h - dy, w, h);
+  const topImage = ctx.getImageData(0, 0, w, h);
+  const bottomImage = ctx.getImageData(0, h - dy, w, h);
 
   ctx.clearRect(0, 0, w, h);
   ctx.putImageData(bottomImage, 0, 0);
@@ -34,7 +34,7 @@ function renderHead(ctx, opts) {
 }
 
 function renderEars(ctx, opts) {
-    var offset = {
+    const offset = {
         x: ctx.canvas.width/2,
         y: ctx.canvas.height/2
     }
@@ -123,14 +123,13 @@ function drawEllipseByCenter(ctx, cx, cy, w, h, color, fillColor, kappa) {
   drawEllipse(ctx, cx - w/2.0, cy - h/2.0, w, h, color, fillColor, kappa);
 }
 
-function drawEllipse(ctx, x, y, w, h, color, fillColor, kappa) {
-  var kappa = kappa || 0.3,
-      ox = (w / 2) * kappa, // control point offset horizontal
-      oy = (h / 2) * kappa, // control point offset vertical
-      xe = x + w,           // x-end
-      ye = y + h,           // y-end
-      xm = x + w / 2,       // x-middle
-      ym = y + h / 2;       // y-middle
+function drawEllipse(ctx, x, y, w, h, color, fillColor, kappa=0.3) {
+  const ox = (w / 2) * kappa; // control point offset horizontal
+  const oy = (h / 2) * kappa; // control point offset vertical
+  const xe = x + w;           // x-end
+  const ye = y + h;           // y-end
+  const xm = x + w / 2;       // x-middle
+  const ym = y + h / 2;       // y-middle
 
   if (color) {
     ctx.strokeStyle = color;
@@ -141,7 +140,7 @@ function drawEllipse(ctx, x, y, w, h, color, fillColor, kappa) {
   ctx.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym);
   ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye);
   ctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym);
-  var fillColor = fillColor || color;
+  fillColor = fillColor || color;
   if (fillColor) {
     ctx.fillStyle = fillColor;
     ctx.fill();

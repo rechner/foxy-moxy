@@ -1,10 +1,10 @@
-var Chance = require('chance');
+const Chance = require('chance');
 
-var hsl = function (h, s, l) {
+const hsl = function (h, s, l) {
   return "hsl(" + h + "," + s + "%, " + l + "%)";
 }
 
-var Fox = function (IMG_WIDTH, IMG_HEIGHT, seed) {
+const Fox = function (IMG_WIDTH, IMG_HEIGHT, seed) {
   if (seed) {
     chance = new Chance(seed);
   } else {
@@ -12,24 +12,24 @@ var Fox = function (IMG_WIDTH, IMG_HEIGHT, seed) {
   }
 
   // origin: head top left corner
-  var kappa = chance.floating({min: 0.2, max: 0.45})
+  const kappa = chance.floating({min: 0.2, max: 0.45})
 
-  var hue = chance.integer({min: 5, max: 50});
-  var saturation = chance.integer({min: 70, max: 90});
-  var lightness = chance.integer({min: 40, max: 60});
+  const hue = chance.integer({min: 5, max: 50});
+  const saturation = chance.integer({min: 70, max: 90});
+  const lightness = chance.integer({min: 40, max: 60});
 
-  var head = {
+  const head = {
     width: 0.6 * IMG_WIDTH,
     height: 0.6 * IMG_HEIGHT,
     kappa: kappa,
     color: hsl(hue, saturation, lightness)
   }
 
-  var origin = {x: IMG_WIDTH / 2 - head.width / 2, y: 0.5 * IMG_HEIGHT - head.height / 2};
+  const origin = {x: IMG_WIDTH / 2 - head.width / 2, y: 0.5 * IMG_HEIGHT - head.height / 2};
 
-  var ears = (function (origin, headWidth, headHeight, headColor) {
-    var offsetX = chance.floating({min: 0.17 * headWidth, max: 0.2 * headWidth});
-    var angle = chance.floating({min: 0.05 * Math.PI, max: 0.2 * Math.PI});
+  const ears = (function (origin, headWidth, headHeight, headColor) {
+    const offsetX = chance.floating({min: 0.17 * headWidth, max: 0.2 * headWidth});
+    const angle = chance.floating({min: 0.05 * Math.PI, max: 0.2 * Math.PI});
     return {
       color: headColor,
       kappa: 0.9 * kappa,
@@ -50,12 +50,12 @@ var Fox = function (IMG_WIDTH, IMG_HEIGHT, seed) {
     };
   }(origin, head.width, head.height, head.color));
 
-  var eyes = (function (origin, headWidth, headHeight) {
+  const eyes = (function (origin, headWidth, headHeight) {
     // TODO: color
-    var offsetY = chance.floating({min: -0.05 * headHeight, max: -0.025 * headHeight});
-    var offsetX = chance.floating({min: 0.13 * headWidth, max: 0.25 * headWidth});
+    const offsetY = chance.floating({min: -0.05 * headHeight, max: -0.025 * headHeight});
+    const offsetX = chance.floating({min: 0.13 * headWidth, max: 0.25 * headWidth});
 
-    var eyeHeight = chance.floating({min: 0.08 * headHeight, max: 0.13 * headHeight});
+    const eyeHeight = chance.floating({min: 0.08 * headHeight, max: 0.13 * headHeight});
 
     return {
       height: eyeHeight,
@@ -73,14 +73,14 @@ var Fox = function (IMG_WIDTH, IMG_HEIGHT, seed) {
     }
   }(origin, head.width, head.height));
 
-  var nose = {
+  const nose = {
     x: origin.x + (head.width/2),
     y: (eyes.left.y + chance.floating({min: 0.2, max: 0.4}) * (origin.y + head.height - eyes.left.y)),
     width: chance.floating({min: 0.03, max: 0.04}) * head.width,
     height: chance.floating({min: 0.03, max: 0.04}) * head.width
   }
 
-  var mouth = {
+  const mouth = {
     x: origin.x + (head.width/2),
     y: (nose.y + chance.floating({min: 0.2, max: 0.35}) * (origin.y + head.height - nose.y)),
     width: chance.floating({min: 0.08, max: 0.15}) * head.width,
@@ -88,7 +88,7 @@ var Fox = function (IMG_WIDTH, IMG_HEIGHT, seed) {
     style: chance.pickone(['smirk', 'cat', 'none'])
   }
 
-  var mask = {
+  const mask = {
     width: chance.floating({min: 0.5 * IMG_WIDTH, max: IMG_WIDTH}),
     height: chance.floating({min: 1.7 * (IMG_HEIGHT - eyes.left.y), max: 1.85 * (IMG_HEIGHT - eyes.left.y)})
   }
