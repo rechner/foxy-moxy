@@ -1,10 +1,11 @@
-# All the Foxes
+# Foxy Moxy
 
 Requires installing cairo.
 
-On mac: `brew install cairo`
+### On mac:
+```brew install cairo```
 
-On linux (Debian and Ubuntu flavors):
+### On linux (Debian and Ubuntu flavors):
 ```
 sudo apt-get install libcairo2-dev
 sudo apt-get install libjpeg-dev
