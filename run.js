@@ -1,7 +1,7 @@
 const cluster = require('express-cluster');
 const app = require('./server.js');
 
-activePort = process.env.PORT || 3000;
+const activePort = process.env.PORT || 3000;
 
 cluster((worker) => {
     app.listen(activePort, () => {
