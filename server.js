@@ -20,9 +20,8 @@ function composeImage(width, height, seed) {
     return canvas;
 };
 
-const app = express();
-
 const cacheTimeout = 60 * 60 * 24 * 30;
+const app = express();
 
 app.get('/healthcheck', (req, res) => {
     res.status(200).end();
@@ -40,6 +39,4 @@ app.get('/:width/:seed', (req, res) => {
     res.end(buffer, 'binary');
 });
 
-app.listen(process.env.PORT || 3000, () => {
-    console.log('listening on http://localhost:3000');
-});
+module.exports = app;
