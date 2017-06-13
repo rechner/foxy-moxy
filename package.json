@@ -4,7 +4,7 @@
   "description": "Makes Fox Faces",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "standard"
   },
   "repository": {
     "type": "git",
@@ -25,5 +25,8 @@
     "node-gyp": "^3.4.0",
     "sanitize-filename": "^1.6.1",
     "uuid": "^3.0.1"
+  },
+  "devDependencies": {
+    "standard": "^8.6.0"
   }
 }
