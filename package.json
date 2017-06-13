@@ -4,7 +4,7 @@
   "description": "Makes Fox Faces",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -21,9 +21,12 @@
     "chance": "^1.0.4",
     "express": "^4.14.0",
     "express-cluster": "0.0.4",
+    "mocha": "^3.4.2",
     "newrelic": "^1.35.1",
     "node-gyp": "^3.4.0",
     "sanitize-filename": "^1.6.1",
+    "sharp": "^0.18.1",
+    "supertest": "^3.0.0",
     "uuid": "^3.0.1"
   }
 }
