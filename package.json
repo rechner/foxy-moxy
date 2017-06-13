@@ -4,7 +4,8 @@
   "description": "Makes Fox Faces",
   "main": "server.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "lint": "standard"
   },
   "repository": {
     "type": "git",
@@ -28,5 +29,8 @@
     "sharp": "^0.18.1",
     "supertest": "^3.0.0",
     "uuid": "^3.0.1"
+  },
+  "devDependencies": {
+    "standard": "^8.6.0"
   }
 }

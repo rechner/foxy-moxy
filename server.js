@@ -1,42 +1,44 @@
+/* eslint no-unused-vars: ["error", { "varsIgnorePattern": "newrelic" }] */
+
 try {
-  const newrelic = require('newrelic');
+  const newrelic = require('newrelic')
 } catch (e) {
-  console.error("WARNING unable to load newrelic")
+  console.error('WARNING unable to load newrelic')
 }
 
-const express = require('express');
-const uuid = require('uuid/v4');
-const sanitize = require('sanitize-filename');
-const Canvas = require('canvas');
+const express = require('express')
+const uuid = require('uuid/v4')
+const sanitize = require('sanitize-filename')
+const Canvas = require('canvas')
 
-const Fox = require('./js/fox.js');
-const renderFox = require('./js/render-fox.js');
+const Fox = require('./js/fox.js')
+const renderFox = require('./js/render-fox.js')
 
-function composeImage(width, height, seed) {
-    seed = seed || uuid();
-    const fox = Fox(width, height, seed);
-    const canvas = new Canvas(width, height);
-    renderFox(canvas, fox);
-    return canvas;
+function composeImage (width, height, seed) {
+  seed = seed || uuid()
+  const fox = Fox(width, height, seed)
+  const canvas = new Canvas(width, height)
+  renderFox(canvas, fox)
+  return canvas
 };
 
-const cacheTimeout = 60 * 60 * 24 * 30;
-const app = express();
+const cacheTimeout = 60 * 60 * 24 * 30
+const app = express()
 
 app.get('/healthcheck', (req, res) => {
-    res.status(200).end();
-});
+  res.status(200).end()
+})
 
 app.get('/:width/:seed', (req, res) => {
-    let width = parseInt(req.params.width) || 400;
-    if (width > 400) width = 400;
-    const seed = sanitize(req.params.seed) || uuid();
-    const canvas = composeImage(width, width, seed);
-    const buffer = canvas.toBuffer();
-    res.set('Cache-Control', 'max-age=' + cacheTimeout);
-    res.set('Content-length', buffer.length);
-    res.type('png');
-    res.end(buffer, 'binary');
-});
+  let width = parseInt(req.params.width) || 400
+  if (width > 400) width = 400
+  const seed = sanitize(req.params.seed) || uuid()
+  const canvas = composeImage(width, width, seed)
+  const buffer = canvas.toBuffer()
+  res.set('Cache-Control', 'max-age=' + cacheTimeout)
+  res.set('Content-length', buffer.length)
+  res.type('png')
+  res.end(buffer, 'binary')
+})
 
-module.exports = app;
+module.exports = app
