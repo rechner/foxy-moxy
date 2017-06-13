@@ -1,8 +1,8 @@
-var head = {
+const head = {
     brick: [0, 62, 53],
     yellow: [48, 100, 64]
 }
-var bg = {
+const bg = {
     forest:     '#006375',
     green:      '#63D6A3',
     blue:       '#358EFF',
