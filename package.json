@@ -22,16 +22,14 @@
     "chance": "^1.0.4",
     "express": "^4.14.0",
     "express-cluster": "0.0.4",
-    "mocha": "^3.4.2",
     "newrelic": "^1.35.1",
     "node-gyp": "^3.4.0",
     "sanitize-filename": "^1.6.1",
-    "sharp": "^0.18.1",
-    "standard": "^8.6.0",
-    "supertest": "^3.0.0",
     "uuid": "^3.0.1"
   },
   "devDependencies": {
-    "standard": "^8.6.0"
+    "mocha": "^3.4.2",
+    "sharp": "^0.18.1",
+    "supertest": "^3.0.0"
   }
 }
