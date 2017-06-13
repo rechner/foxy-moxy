@@ -27,6 +27,7 @@
     "node-gyp": "^3.4.0",
     "sanitize-filename": "^1.6.1",
     "sharp": "^0.18.1",
+    "standard": "^8.6.0",
     "supertest": "^3.0.0",
     "uuid": "^3.0.1"
   },
