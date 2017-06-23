@@ -1,12 +1,5 @@
-/* eslint no-unused-vars: ["error", { "varsIgnorePattern": "newrelic" }] */
-
-try {
-  const newrelic = require('newrelic')
-} catch (e) {
-  console.error('WARNING unable to load newrelic')
-}
-
 const express = require('express')
+const connectDatadog = require('connect-datadog')
 const uuid = require('uuid/v4')
 const sanitize = require('sanitize-filename')
 const Canvas = require('canvas')
@@ -46,6 +39,7 @@ function getFox (req, res, version) {
 
 const cacheTimeout = 60 * 60 * 24 * 30
 const app = express()
+app.use(connectDatadog({stat: 'foxy-moxy'}))
 
 app.get('/healthcheck', (req, res) => {
   res.status(200).end()
