@@ -20,9 +20,9 @@
   "dependencies": {
     "canvas": "^1.6.2",
     "chance": "^1.0.4",
+    "connect-datadog": "*",
     "express": "^4.14.0",
     "express-cluster": "0.0.4",
-    "newrelic": "^1.35.1",
     "node-gyp": "^3.4.0",
     "sanitize-filename": "^1.6.1",
     "uuid": "^3.0.1"
