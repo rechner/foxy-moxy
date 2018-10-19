@@ -1,4 +1,5 @@
 const Chance = require('chance')
+const colors = require('./constants/colors.js')
 
 const hsl = function (h, s, l) {
   return 'hsl(' + h + ',' + s + '%, ' + l + '%)'
@@ -10,15 +11,25 @@ const Fox = function (IMG_WIDTH, IMG_HEIGHT, seed) {
   // origin: head top left corner
   const kappa = chance.floating({min: 0.2, max: 0.45})
 
-  const hue = chance.integer({min: 5, max: 50})
-  const saturation = chance.integer({min: 70, max: 90})
-  const lightness = chance.integer({min: 40, max: 60})
+  chance.bool()
+  chance.bool()
+
+  const headColor = (function () {
+    const level = chance.floating({min: 0, max: 1})
+    const result = []
+    const min = colors.head.brick
+    const max = colors.head.yellow
+    for (let i = 0; i < min.length; i++) {
+      result.push(min[i] + (max[i] - min[i]) * level)
+    }
+    return hsl.apply(null, result)
+  })()
 
   const head = {
     width: 0.6 * IMG_WIDTH,
     height: 0.6 * IMG_HEIGHT,
     kappa: kappa,
-    color: hsl(hue, saturation, lightness)
+    color: headColor
   }
 
   const origin = {x: IMG_WIDTH / 2 - head.width / 2, y: 0.5 * IMG_HEIGHT - head.height / 2}
@@ -94,11 +105,7 @@ const Fox = function (IMG_WIDTH, IMG_HEIGHT, seed) {
     canvas: {
       height: IMG_HEIGHT,
       width: IMG_WIDTH,
-      color: hsl(
-        chance.integer({min: 0, max: 360}),
-        chance.integer({min: 0, max: 100}),
-        chance.integer({min: 10, max: 100})
-      )
+      color: chance.pickone(Object.keys(colors.bg).map(function (key) { return colors.bg[key] }))
     },
     head: head,
     ears: ears,

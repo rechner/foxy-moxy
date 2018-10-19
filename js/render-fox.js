@@ -1,7 +1,9 @@
 const renderFox = function (canvas, opts) {
   const width = opts.canvas.width
   const height = opts.canvas.height
-  const ctx = canvas.getContext('2d')
+  const ctx = canvas.getContext('2d', {
+    pixelFormat: 'RGB16_565',
+  })
 
   ctx.fillStyle = opts.canvas.color
   ctx.fillRect(0, 0, width, height)
