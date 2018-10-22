@@ -19,11 +19,21 @@ function getFox (req, res, version) {
   let width = parseInt(req.params.width) || 400
   if (width > 400) width = 400
   const seed = sanitize(req.params.seed) || uuid()
+  const etag = `W/${seed}`
+  const contentType = 'image/png'
+
+  res.set('Cache-Control', 'public; max-age=' + cacheTimeout)
+  res.set('Content-Type', contentType)
+  res.set('Etag', etag)
+
+  if (req.headers['if-none-match'] === etag) {
+      res.status(304).end('')
+      return
+  }
+
   const canvas = composeImage(width, width, seed, version)
-  const buffer = canvas.toBuffer('image/png')
-  res.set('Cache-Control', 'max-age=' + cacheTimeout)
-  res.set('Content-length', buffer.length)
-  res.type('png')
+  const buffer = canvas.toBuffer(contentType)
+  res.set('Content-Length', buffer.length)
   res.end(buffer, 'binary')
 }
 

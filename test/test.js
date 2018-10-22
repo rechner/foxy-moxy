@@ -50,6 +50,21 @@ describe('Foxy-moxy v1', () => {
 
 describe('Foxy-moxy v2', () => {
   describe('fox generation', () => {
+    it('should give 304 when presented with correct etag', (done) = async function () {
+      const uncachedResponse = await request(app)
+        .get(`/2/400/${testUID}`)
+        .expect('Content-Type', 'image/png')
+        .expect(200)
+
+      const cachedResponse = await request(app)
+        .get(`/2/400/${testUID}`)
+        .set('If-None-Match', uncachedResponse.headers.etag)
+        .expect('Content-Type', 'image/png')
+        .expect(304)
+
+      done()
+    })
+
     it('should respect widths < 400', (done) => {
       const width = 158
       request(app)
