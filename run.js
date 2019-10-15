@@ -1,3 +1,6 @@
+if (process.env.CI !== 'true') {
+  require('dd-trace').init({service: 'foxy-moxy'})
+}
 const cluster = require('express-cluster')
 const app = require('./server.js')
 
