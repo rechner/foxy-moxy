@@ -25,13 +25,13 @@
     "dd-trace": "^0.15.4",
     "express": "^4.16.4",
     "express-cluster": "0.0.4",
-    "node-gyp": "^3.8.0",
+    "node-gyp": "^10.0.0",
     "sanitize-filename": "^1.6.1",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "mocha": "^5.2.0",
-    "sharp": "^0.18.4",
+    "mocha": "^10.2.0",
+    "sharp": "^0.32.4",
     "supertest": "^3.3.0"
   }
 }
