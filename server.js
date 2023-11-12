@@ -1,6 +1,5 @@
 const express = require('express')
-const connectDatadog = require('connect-datadog')
-const uuid = require('uuid/v4')
+const { v4: uuidv4 } = require('uuid')
 const sanitize = require('sanitize-filename')
 const Canvas = require('canvas')
 const Sentry = require('@sentry/node');
@@ -39,8 +38,9 @@ function getFox (req, res, version) {
 
 const cacheTimeout = 60 * 60 * 24 * 30
 const app = express()
-app.use(connectDatadog({stat: 'foxy-moxy'}))
-Sentry.init({ dsn: 'https://46660182a19d400f9775f441ac9bcf15@sentry.io/1780766' })
+if (process.env.SENTRY_DSN) {
+    Sentry.init({ dsn: process.env.SENTRY_DSN })
+}
 
 // The request handler must be the first middleware on the app
 app.use(Sentry.Handlers.requestHandler())

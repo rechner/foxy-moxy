@@ -18,16 +18,14 @@
   },
   "homepage": "https://github.com/Patreon/foxy-moxy#readme",
   "dependencies": {
-    "@sentry/node": "^5.7.1",
-    "canvas": "^2.0.1",
-    "chance": "^1.0.16",
-    "connect-datadog": "*",
-    "dd-trace": "^0.15.4",
-    "express": "^4.16.4",
+    "@sentry/node": "^7.80.0",
+    "canvas": "^2.11.2",
+    "chance": "^1.1.11",
+    "express": "^4.18.2",
     "express-cluster": "0.0.4",
     "node-gyp": "^10.0.0",
-    "sanitize-filename": "^1.6.1",
-    "uuid": "^3.3.2"
+    "sanitize-filename": "^1.6.3",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "mocha": "^10.2.0",
